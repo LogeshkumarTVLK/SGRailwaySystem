@@ -23,7 +23,9 @@ fun main(args: Array<String>) {
     file.forEachLine {
        stationsString.add(it)
     }
+    //Read content from file
     val parser = Parser()
+    //Get the list of stations after parsing
     val listOfAvailableStations = parser.buildStationsWithLines(stationsString)
     println("Enter your source: ")
     val source = listOfAvailableStations[readLine()]
@@ -37,8 +39,10 @@ fun main(args: Array<String>) {
         println("Destination shouldn't be null")
         exitProcess(1)
     }
+    //Build the map after parsing.
     val sourceDestinationList = parser.getSourceDestinationList(stationsString)
     val railwayMap = RailwayMap(sourceDestinationList)
+    //TODO: Enhance based on the rule
     val routeFinder = RouteFinder(PeakHoursRule(), railwayMap)
     val shortestPath = routeFinder.findShortestPath(source, destination)
     println("Your shortest path is, \n")
